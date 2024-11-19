@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -24,11 +25,26 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        // $request->authenticate();
 
-        $request->session()->regenerate();
+        // $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // return redirect()->intended(route('dashboard', absolute: false));
+        
+        $request->validate([
+            'npm' => 'required|string',  // Pastikan npm ada
+            'password' => 'required|string',
+        ]);
+    
+        if (Auth::attempt(['npm' => $request->npm, 'password' => $request->password], $request->boolean('remember'))) {
+            $request->session()->regenerate();
+    
+            return redirect()->intended(route('dashboard'));
+        }
+    
+        throw ValidationException::withMessages([
+            'npm' => __('The provided credentials do not match our records.'),
+        ]);
     }
 
     /**

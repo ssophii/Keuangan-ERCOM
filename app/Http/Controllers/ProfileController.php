@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Anggota;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,9 +17,9 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $user = $request->user();
+        $anggota = Anggota::where('user_id', $user->id)->first();
+        return view('profile.edit', compact('user', 'anggota'));
     }
 
     /**
@@ -57,4 +58,22 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function store(Request $request)
+{
+    $validated = $request->validate([
+        'bidang' => 'required|string|max:255',
+        'no_hp' => 'required|string|max:15',
+    ]);
+
+    Anggota::updateOrCreate(
+        ['user_id' => auth::id()], // Cek berdasarkan user_id
+        [
+            'bidang' => $validated['bidang'],
+            'no_hp' => $validated['no_hp'],
+        ]
+    );
+
+    return back()->with('success', 'Data berhasil disimpan.');
+}
 }

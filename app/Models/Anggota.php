@@ -10,7 +10,7 @@ class Anggota extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'npm',
+        'user_id',
         'bidang',
         'no_hp',
     ];

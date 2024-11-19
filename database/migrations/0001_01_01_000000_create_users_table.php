@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('npm')->unique();
             $table->timestamp('npm_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->default('12345678');
             $table->enum('role', ['bendahara', 'anggota'])->default('anggota');
             $table->rememberToken();
             $table->timestamps();
