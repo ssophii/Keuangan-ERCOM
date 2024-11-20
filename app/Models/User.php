@@ -21,6 +21,7 @@ class User extends Authenticatable
         'npm',
         'name',
         'password',
+        'role',
     ];
 
     public function anggota()

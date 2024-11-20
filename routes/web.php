@@ -23,7 +23,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/anggota/store', [AnggotaController::class, 'store'])->middleware('auth')->name('anggota.store');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota.index');
+    Route::post('/anggota/store', [AnggotaController::class, 'store'])->name('anggota.store');
+});
 
 Route::post('/password/whatsapp', [PasswordResetLinkController::class, 'sendResetLinkViaWhatsApp'])->name('password.whatsapp');
 
