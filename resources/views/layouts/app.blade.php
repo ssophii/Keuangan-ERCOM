@@ -41,7 +41,8 @@
 
 </head>
 <body>
-    <div class="container-scroller">
+    <div>
+      <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -104,7 +105,7 @@
               @endif
               @if (Auth::user()->role == 'bendahara')
               <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/pemasukkan">
                   <i class="fa-solid fa-file-circle-plus menu-icon"></i>
                     <span class="menu-title">Pemasukkan</span>
                 </a>
@@ -132,37 +133,47 @@
           <!-- partial -->
           <div class="main-panel">
             <div class="content-wrapper">
-              <div class="row">
-                <div class="col-md-12 mb-3 mb-xl-3">
-                  <div class="row">
-                    <div class="col-12 col-xl-8 card">
-                        <h3 class="font-weight-bold mt-3 mb-2">HALLO {{ Auth::user()->name }}!</h3>
-                      {{-- <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6> --}}
-                    </div>
-                  </div>
+              <div>
+                <div>
+                  <h3 class="font-weight-bold mb-2">HALLO {{ Auth::user()->name }}!</h3>
+                    {{-- <div class="mb-3 pb-2 pt-1 px-2 bg-white shadow">
+                        <div class="mb-10">
+                            <h3 class="font-weight-bold mt-3 mb-2">HALLO {{ Auth::user()->name }}!</h3>
+                        </div>
+                    </div> --}}
                 </div>
               </div>
             {{-- <div class="row"> --}}
                 <main class="flex-1">
-                    {{-- <div class="container mx-auto p-4"> --}}
+                  <div class="py-12">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                        <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                            <div class="max-w-xl">
+                                {{ $slot }}
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                    {{-- <div class="container mx-auto p-4">
                         {{ $slot }}
-                    {{-- </div> --}}
+                    </div> --}}
                 </main>    
             {{-- </div> --}}
               
             <!-- content-wrapper ends -->
             <!-- partial:partials/_footer.html -->
-            <footer class="footer">
-              <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Engineering Research Community 2024</span> 
-              </div>
-            </footer> 
             <!-- partial -->
           </div>
           <!-- main-panel ends -->
         </div>   
         <!-- page-body-wrapper ends -->
       </div>
+      <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Engineering Research Community 2024</span> 
+        </div>
+      </footer> 
+    </div>
   <!-- plugins:js -->
   <script src="{{ asset('assets/vendor/js/vendor.bundle.base.js') }}"></script>
   <!-- endinject -->
@@ -193,4 +204,3 @@
   
 </body>
 </html>
-
