@@ -18,8 +18,8 @@ return new class extends Migration
             $table->enum('bidang', ['inti', 'psdm', 'diklat', 'ripi', 'kominfo', 'kestari', 'keuangan']);
             $table->string('kegiatan');
             $table->integer('nominal');
-            $table->string('keterangan');
-            $table->string('bukti');
+            $table->string('keterangan')->nullable();
+            $table->string('bukti')->nullable();
             $table->timestamps();
         });
     }

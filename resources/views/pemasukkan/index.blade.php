@@ -1,15 +1,22 @@
 <x-app-layout>
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="card">
         <div class="mt-1 mr-3 ml-3 mb-3">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3> Data Pemasukkan </h3>
-                <button type="button"
-                    class="btn btn-primary" 
-                    style="width: 4.3cm; height: 1cm; border-radius: 3px;"
-                    data-toggle="modal"
-                    data-target="#modalTambah">
-                    <strong>Tambah Pemasukkan</strong>
-                </button>
+                @if (auth()->user()->role == 'bendahara')
+                    <button type="button"
+                        class="btn btn-primary" 
+                        style="width: 4.3cm; height: 1cm; border-radius: 3px;"
+                        data-toggle="modal"
+                        data-target="#modalTambah">
+                        <strong>Tambah Pemasukkan</strong>
+                    </button>
+                @endif
                 <!-- Modal Tambah Data -->
                 <div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="modalTambahLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
@@ -46,7 +53,7 @@
                                         <div>
                                             <div class="col font-weight-bold mt-3 mb-2">Nominal</div>
                                             <div class="col">
-                                                <input type="text" name="nominal" class="form-control" placeholder="Masukkan nominal pemasukkan">
+                                                <input type="number" name="nominal" class="form-control" placeholder="Masukkan nominal pemasukkan">
                                             </div>
                                         </div>
                                         <div>
@@ -69,45 +76,51 @@
             <table id="dataPemasukkan" class="ui celled table" style="width:100%">
                 <thead>
                     <tr>
+                        {{-- <th>No</th> --}}
                         <th>Tanggal</th>
                         <th>Kategori</th>
                         <th>Nominal</th>
                         <th>Keterangan</th>
-                        <th>Aksi</th>
+                        @if (auth()->user()->role == 'bendahara')
+                            <th>Aksi</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($pemasukkan as $data)
                     <tr>
-                        <td>{{ $data->tanggal }}</td>
+                        {{-- <td>{{ $loop->iteration }}</td> --}}
+                        <td>{{ \Carbon\Carbon::parse($data->tanggal)->translatedFormat('d F Y') }}</td>
                         <td>{{ $data->kategori }}</td>
-                        <td>{{ $data->nominal}}</td>
+                        <td>Rp {{ number_format($data->nominal, 0, ',', '.') }}</td>
                         <td>{{ $data->keterangan}}</td>
-                        <td class="d-flex justify-content-between align-items-center" style="gap: 10px;">
-                            <!-- Tombol Edit -->
-                            <button type="button"
-                                class="btn btn-warning justify-content-center align-items-center" 
-                                style="width: 35px; height: 35px; border-radius: 10px;"
-                                data-toggle="modal" 
-                                data-target="#modal{{ $data->id }}">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                        
-                            <!-- Tombol Delete -->
-                            <form action="{{ route('pemasukkan.destroy', $data->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="btn btn-danger justify-content-center align-items-center" 
-                                    style="width: 35px; height: 35px; border-radius: 10px;" 
-                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                    <i class="fa-solid fa-trash"></i>
+                        @if (auth()->user()->role == 'bendahara')
+                            <td class="d-flex justify-content-between align-items-center" style="gap: 10px;">
+                                <!-- Tombol Edit -->
+                                <button type="button"
+                                    class="btn btn-warning justify-content-center align-items-center" 
+                                    style="width: 35px; height: 35px; border-radius: 10px;"
+                                    data-toggle="modal" 
+                                    data-target="#modalEdit{{ $data->id }}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
-                            </form>
-                        </td>
+                            
+                                <!-- Tombol Delete -->
+                                <form action="{{ route('pemasukkan.destroy', $data->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="btn btn-danger justify-content-center align-items-center" 
+                                        style="width: 35px; height: 35px; border-radius: 10px;" 
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        @endif
                     </tr>
                     <!-- Modal untuk setiap baris -->
-                    <div class="modal fade" id="modal{{ $data->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $data->id }}" aria-hidden="true">
+                    <div class="modal fade" id="modalEdit{{ $data->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $data->id }}" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <!-- Form untuk update -->

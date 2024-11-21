@@ -1,3 +1,8 @@
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 <x-app-layout>
     <div class="card">
         <div class="mt-1 mr-3 ml-3 mb-3">

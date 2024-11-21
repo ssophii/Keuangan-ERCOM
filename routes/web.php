@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PemasukkanController;
+use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pemasukkan', [PemasukkanController::class, 'store'])->name('pemasukkan.store');
     Route::delete('/pemasukkan/{id}', [PemasukkanController::class, 'destroy'])->name('pemasukkan.destroy');
     Route::put('/pemasukkan/{id}', [PemasukkanController::class, 'update'])->name('pemasukkan.update');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/pengeluaran', [PengeluaranController::class, 'index'])->name('pengeluaran.index');
+    Route::post('/pengeluaran', [PengeluaranController::class, 'store'])->name('pengeluaran.store');
+    Route::delete('/pengeluaran/{id}', [PengeluaranController::class, 'destroy'])->name('pengeluaran.destroy');
+    Route::put('/pengeluaran/{id}', [PengeluaranController::class, 'update'])->name('pengeluaran.update');
 });
 
 

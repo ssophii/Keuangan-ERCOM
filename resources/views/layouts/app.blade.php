@@ -103,7 +103,7 @@
                 </a>
               </li>
               @endif
-              @if (Auth::user()->role == 'bendahara')
+              @if (Auth::user()->role == 'bendahara'|| Auth::user()->role == 'anggota')
               <li class="nav-item">
                 <a class="nav-link" href="/pemasukkan">
                   <i class="fa-solid fa-file-circle-plus menu-icon"></i>
@@ -111,9 +111,9 @@
                 </a>
               </li>
               @endif
-              @if (Auth::user()->role == 'bendahara')
+              @if (Auth::user()->role == 'bendahara'|| Auth::user()->role == 'anggota')
               <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/pengeluaran">
                   <i class="fa-solid fa-file-circle-minus menu-icon"></i>
                     <span class="menu-title">Pengeluaran</span>
                 </a>

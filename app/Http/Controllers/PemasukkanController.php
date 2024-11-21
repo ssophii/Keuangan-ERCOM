@@ -12,7 +12,7 @@ class PemasukkanController extends Controller
      */
     public function index()
     {
-        $pemasukkan = Pemasukkan::all();
+        $pemasukkan = Pemasukkan::orderBy('tanggal', 'desc')->get();
 
         return view('pemasukkan.index', compact('pemasukkan'));
     }
@@ -30,19 +30,14 @@ class PemasukkanController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
+        $validated = $request->validate([
             'tanggal' => 'required|date',
             'kategori' => 'required|string|max:255',
             'nominal' => 'required|numeric',
             'keterangan' => 'nullable|string|max:255',
         ]);
 
-        Pemasukkan::create([
-            'tanggal' => $validate['tanggal'],
-            'kategori' => $validate['kategori'],
-            'nominal' => $validate['nominal'],
-            'keterangan' => $validate['keterangan'],
-        ]);
+        Pemasukkan::create($validated);
         return redirect()->back()->with('success', 'Data pemasukkan berhasil ditambahkan');
     }
 
@@ -51,7 +46,8 @@ class PemasukkanController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $pemasukkan = Pemasukkan::findOrFail($id);
+        return view('pemasukkan.show', compact('pemasukkan'));
     }
 
     /**
@@ -59,7 +55,8 @@ class PemasukkanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pemasukkan = Pemasukkan::findOrFail($id);
+        return view('pemasukkan.edit', compact('pemasukkan'));
     }
 
     /**
