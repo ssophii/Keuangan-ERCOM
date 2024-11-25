@@ -14,7 +14,7 @@
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/datatables.net-bs4/dataTables.bootstrap4.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/ti-icons/css/themify-icons.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/ti-icons/css/themify-icons.css') }}"> --}}
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
@@ -199,6 +199,7 @@
   <!-- Custom js for this page-->
   <script src="{{ asset('assets/js/dashboard.js') }}"></script>
   <script src="{{ asset('assets/js/Chart.roundedBarCharts.js') }}"></script>
+  <script src="{{ asset('assets/js/chart.js') }}"></script>
   <!-- End custom js for this page-->
 
   

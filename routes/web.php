@@ -5,6 +5,7 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PemasukkanController;
 use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/pengeluaran/{id}', [PengeluaranController::class, 'update'])->name('pengeluaran.update');
 });
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard/cetak', [DashboardController::class, 'cetakLaporan'])->name('dashboard.cetak');
+// Route::get('/cetak-laporan', [LaporanController::class, 'cetak'])->name('cetak.laporan');
 
 Route::post('/password/whatsapp', [PasswordResetLinkController::class, 'sendResetLinkViaWhatsApp'])->name('password.whatsapp');
 

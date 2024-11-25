@@ -47,7 +47,7 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'npm_verified_at' => 'datetime',
+            // 'npm_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
