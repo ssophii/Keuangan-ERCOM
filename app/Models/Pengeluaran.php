@@ -21,8 +21,4 @@ class Pengeluaran extends Model
         'bukti',
     ];
     
-    public function saldo(): BelongsTo
-    {
-        return $this->belongsTo(Saldo::class);
-    }
 }

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('pengeluarans', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->enum('kategori', ['inventaris', 'sewa', 'proker', 'lainnya']);
-            $table->enum('bidang', ['inti', 'psdm', 'diklat', 'ripi', 'kominfo', 'kestari', 'keuangan']);
+            $table->enum('kategori', ['Inventaris', 'Sewa', 'Proker', 'Lainnya']);
+            $table->enum('bidang', ['Inti', 'PSDM', 'Diklat', 'Ripi', 'Kominfo', 'Biro Kestari', 'Biro Keuangan']);
             $table->string('kegiatan');
             $table->integer('nominal');
             $table->string('keterangan')->nullable();

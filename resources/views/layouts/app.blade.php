@@ -39,6 +39,14 @@
     <!-- DataTables Semantic UI JS -->
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.semanticui.js"></script>
 
+    <style>
+      .underline {
+          text-decoration: underline; /* Memberikan garis bawah */
+          text-underline-offset: 4px; /* Jarak garis bawah */
+          text-decoration-thickness: 2px; /* Ketebalan garis bawah */
+          text-decoration-color: #000; /* Warna garis bawah */
+      }
+  </style>
 </head>
 <body>
     <div>
@@ -53,18 +61,6 @@
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
               <span class="icon-menu"></span>
             </button>
-            <ul class="navbar-nav mr-lg-2">
-              <li class="nav-item nav-search d-none d-lg-block">
-                <div class="input-group">
-                  <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                    <span class="input-group-text" id="search">
-                      <i class="icon-search"></i>
-                    </span>
-                  </div>
-                  <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-                </div>
-              </li>
-            </ul>
             <ul class="navbar-nav navbar-nav-right">
               <li class="nav-item nav-profile dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
@@ -135,7 +131,8 @@
             <div class="content-wrapper">
               <div>
                 <div>
-                  <h3 class="font-weight-bold mb-2">HALLO {{ Auth::user()->name }}!</h3>
+                  <h3 class="font-weight-bold mb-2 underline" > {{ Auth::user()->name }}</h3>
+                    <p>{{ ucfirst(Auth::user()->role) }}</p>
                     {{-- <div class="mb-3 pb-2 pt-1 px-2 bg-white shadow">
                         <div class="mb-10">
                             <h3 class="font-weight-bold mt-3 mb-2">HALLO {{ Auth::user()->name }}!</h3>
@@ -147,16 +144,10 @@
                 <main class="flex-1">
                   <div class="py-12">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                        <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                            <div class="max-w-xl">
-                                {{ $slot }}
-                            </div>
-                        </div>
+                      {{ $slot }}
+                        
                     </div>
                   </div>
-                    {{-- <div class="container mx-auto p-4">
-                        {{ $slot }}
-                    </div> --}}
                 </main>    
             {{-- </div> --}}
               

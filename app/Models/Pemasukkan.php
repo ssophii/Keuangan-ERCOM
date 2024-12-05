@@ -13,12 +13,9 @@ class Pemasukkan extends Model
     protected $fillable = [
         'tanggal',
         'kategori',
+        'bidang',
         'nominal',
         'keterangan',
     ];
 
-    public function saldo(): BelongsTo
-    {
-        return $this->belongsTo(Saldo::class);
-    }
 }

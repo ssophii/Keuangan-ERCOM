@@ -80,12 +80,17 @@ class DashboardController extends Controller
             $bulanSelesai . '-31'
         ])->get();
 
+        // Hitung saldo terakhir (semua bulan sebelum bulanMulai)
+        $saldoTerakhir = Pemasukkan::where('tanggal', '<', $bulanMulai . '-01')->sum('nominal') 
+                         - Pengeluaran::where('tanggal', '<', $bulanMulai . '-01')->sum('nominal');
+    
         $totalPemasukkan = $pemasukkan->sum('nominal');
         $totalPengeluaran = $pengeluaran->sum('nominal');
         $saldo = $totalPemasukkan - $totalPengeluaran;
+        $totalsaldo = $saldoTerakhir + $totalPemasukkan - $totalPengeluaran;
 
         // Return ke view cetak
-        return view('cetak.laporan', compact('pemasukkan', 'pengeluaran', 'totalPemasukkan', 'totalPengeluaran', 'saldo', 'bulanMulai', 'bulanSelesai'));
+        return view('cetak.laporan', compact('pemasukkan', 'pengeluaran', 'totalsaldo','saldoTerakhir', 'totalPemasukkan', 'totalPengeluaran', 'saldo', 'bulanMulai', 'bulanSelesai'));
     }
 
 

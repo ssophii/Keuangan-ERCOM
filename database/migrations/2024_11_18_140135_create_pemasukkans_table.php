@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('pemasukkans', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->enum('kategori', ['kas', 'dana dekanat', 'lainnya']);
+            $table->enum('kategori', ['Kas', 'Dana Dekanat', 'Lainnya']);
+            $table->enum('bidang', ['Inti', 'PSDM', 'Diklat', 'Ripi', 'Kominfo', 'Biro Kestari', 'Biro Keuangan']);
             $table->integer('nominal');
             $table->string('keterangan');
             $table->timestamps();

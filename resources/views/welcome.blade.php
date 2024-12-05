@@ -62,14 +62,68 @@
 
       <div class="container">
         <div class="row gy-4 justify-content-between">
-          <div class="col-lg-4 order-lg-last hero-img" data-aos="zoom-out" data-aos-delay="100">
-            <img src="{{ asset('assets/img/dashboard-image.png') }}" class="img-fluid animated" alt="">
-          </div>
 
           <div class="col-lg-6  d-flex flex-column justify-content-center" data-aos="fade-in">
             <h1>Selamat Datang di Website <span>Keuangan ERCOM</span></h1>
             {{-- <p>Mau ngapain hari ini?</p> --}}
           </div>
+
+          <div class="col-lg-4 mx-auto rounded-lg">
+            <div class="auth-form-dark text-left py-5 px-4 px-sm-5 bg-white shadow rounded-lg">
+              <div class="brand-logo">
+                <div class="text-center mb-4">
+                    <img src="{{ asset('assets/images/logo-himatif.png') }}" alt="logo" class="logo-center">
+                </div>
+              </div>
+              <h4 class="text-dark">Hello! Ayo Masuk</h4>
+              <h6 class="font-weight-light text-secondary">Login untuk melanjutkan.</h6>
+
+              <!-- Form Start -->
+              <form method="POST" action="{{ route('login') }}" class="pt-3">
+                @csrf
+
+                <!-- NPM -->
+                <div class="form-group">
+                  <input type="text" id="npm" class="form-control form-control-lg" name="npm" :value="old('npm')" required autofocus placeholder="NPM">
+                  @error('npm')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                  <input type="password" id="password" class="form-control form-control-lg" name="password" required placeholder="Password">
+                  @error('password')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+                </div>
+
+                <!-- Login Button -->
+                <div class="mt-3" style="align-items: center">
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                    MASUK
+                  </button>
+                </div>
+
+                <!-- Forgot Password -->
+                <div class="my-2 d-flex justify-content-between align-items-center">
+                  @if (Route::has('password.request'))
+                    <a class="auth-link text-black" href="{{ route('password.request') }}">
+                      Forgot password?
+                    </a>
+                  @endif
+                </div>
+
+                <!-- Register Link -->
+                <div class="text-dark text-center mt-4 font-weight-light">
+                  Belum Punya Akun? <a href="{{ route('register') }}" class="text-primary">Buat</a>
+                </div>
+              </form>
+              <!-- Form End -->
+
+            </div>
+          </div>
+
 
         </div>
       </div>

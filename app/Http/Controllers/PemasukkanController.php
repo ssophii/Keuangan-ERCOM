@@ -12,7 +12,8 @@ class PemasukkanController extends Controller
      */
     public function index()
     {
-        $pemasukkan = Pemasukkan::orderBy('tanggal', 'desc')->get();
+        // $pemasukkan = Pemasukkan::orderBy('tanggal', 'asc')->get();
+        $pemasukkan = Pemasukkan::select('*')->orderByRaw("strftime('%m', tanggal) ASC, strftime('%d', tanggal) ASC")->get();
 
         return view('pemasukkan.index', compact('pemasukkan'));
     }
@@ -32,6 +33,7 @@ class PemasukkanController extends Controller
     {
         $validated = $request->validate([
             'tanggal' => 'required|date',
+            'bidang' => 'required|string|max:255',
             'kategori' => 'required|string|max:255',
             'nominal' => 'required|numeric',
             'keterangan' => 'nullable|string|max:255',
@@ -66,6 +68,7 @@ class PemasukkanController extends Controller
     {
         $validate = $request->validate([
             'tanggal' => 'required|date',
+            'bidang' => 'required|string|max:255',
             'kategori' => 'required|string|max:255',
             'nominal' => 'required|numeric',
             'keterangan' => 'required|string|max:255',

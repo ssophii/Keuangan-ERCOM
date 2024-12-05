@@ -13,7 +13,7 @@ class AnggotaSeeder extends Seeder
      */
     public function run(): void
     {
-        Anggota::factory()->create([
+        Anggota::factory()->createMany([
             [
                 'user_id' => 1,
                 'bidang' => 'Inti',
