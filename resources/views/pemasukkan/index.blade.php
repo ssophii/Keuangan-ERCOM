@@ -60,13 +60,13 @@
                                                         <select name="bidang" class="form-control" required>
                                                             <option value="" disabled selected>Pilih Bidang
                                                             </option>
-                                                            <option value="inti">Inti</option>
-                                                            <option value="keuangan">Biro Keuangan</option>
-                                                            <option value="kestari">Biro Kestari</option>
-                                                            <option value="psdm">PSDM</option>
-                                                            <option value="diklat">Diklat</option>
-                                                            <option value="ripi">Ripi</option>
-                                                            <option value="kominfo">Kominfo</option>
+                                                            <option value="Inti">Inti</option>
+                                                            <option value="Biro Keuangan">Biro Keuangan</option>
+                                                            <option value="Biro Kestari">Biro Kestari</option>
+                                                            <option value="PSDM">PSDM</option>
+                                                            <option value="Diklat">Diklat</option>
+                                                            <option value="Ripi">Ripi</option>
+                                                            <option value="Kominfo">Kominfo</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -114,7 +114,8 @@
                             @foreach ($pemasukkan as $data)
                                 <tr>
                                     {{-- <td>{{ $loop->iteration }}</td> --}}
-                                    <td>{{ \Carbon\Carbon::parse($data->tanggal)->translatedFormat('d F Y') }}</td>
+                                    <td data-order="{{ \Carbon\Carbon::parse($data->tanggal)->format('Y-m-d') }}">
+                                        {{ \Carbon\Carbon::parse($data->tanggal)->translatedFormat('d F Y') }}</td>
                                     <td>{{ $data->kategori }}</td>
                                     <td>{{ $data->bidang }}</td>
                                     <td>Rp {{ number_format($data->nominal, 0, ',', '.') }}</td>
@@ -255,7 +256,7 @@
             <script>
                 $(document).ready(function() {
                     $('#dataPemasukkan').DataTable();
-
+                        
                 });
             </script>
         </div>

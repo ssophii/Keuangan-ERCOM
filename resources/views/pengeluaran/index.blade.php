@@ -68,13 +68,13 @@
                                                         <select name="bidang" class="form-control" required>
                                                             <option value="" disabled selected>Pilih Bidang
                                                             </option>
-                                                            <option value="inti">Inti</option>
-                                                            <option value="keuangan">Biro Keuangan</option>
-                                                            <option value="kestari">Biro Kestari</option>
-                                                            <option value="psdm">PSDM</option>
-                                                            <option value="diklat">Diklat</option>
-                                                            <option value="ripi">Ripi</option>
-                                                            <option value="kominfo">Kominfo</option>
+                                                            <option value="Inti">Inti</option>
+                                                            <option value="Biro Keuangan">Biro Keuangan</option>
+                                                            <option value="Biro Kestari">Biro Kestari</option>
+                                                            <option value="PSDM">PSDM</option>
+                                                            <option value="Diklat">Diklat</option>
+                                                            <option value="Ripi">Ripi</option>
+                                                            <option value="Kominfo">Kominfo</option>
                                                         </select>
                                                         @error('bidang')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -150,17 +150,22 @@
                             @foreach ($pengeluaran as $data)
                                 <tr>
                                     {{-- <td>{{ $loop->iteration }}</td> --}}
-                                    <td>{{ \Carbon\Carbon::parse($data->tanggal)->translatedFormat('d F Y') }}</td>
+                                    <td data-order="{{ \Carbon\Carbon::parse($data->tanggal)->format('Y-m-d') }}">
+                                        {{ \Carbon\Carbon::parse($data->tanggal)->translatedFormat('d F Y') }}</td>
                                     <td>{{ $data->kategori }}</td>
                                     <td>{{ $data->bidang }}</td>
                                     <td>{{ $data->kegiatan }}</td>
                                     <td>Rp{{ number_format($data->nominal, 0, ',', '.') }}</td>
                                     <td>{{ $data->keterangan }}</td>
                                     <td>
-                                        <a href="{{ asset('storage/' . $data->bukti) }}" target="_blank">
-                                            {{ $data->bukti }}
-                                            {{-- <button class="btn btn-info">Lihat Bukti</button> --}}
-                                        </a>
+                                        @if ($data->bukti)
+                                            <a href="{{ asset('storage/' . $data->bukti) }}"
+                                                class="btn btn-info " target="_blank">
+                                                <i class="bi bi-file-earmark-pdf"></i> Lihat Bukti
+                                            </a>
+                                        @else
+                                            <span class="text-muted">Tidak ada</span>
+                                        @endif
                                     </td>
                                     @if (auth()->user()->role == 'bendahara')
                                         <td class="d-flex justify-content-center">

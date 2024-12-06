@@ -20,6 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
+    <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
@@ -33,11 +34,12 @@
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
     <!-- Injected Styles -->
-    <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}"> --}}
 
 </head>
 
-<body class="index-page">
+<body class="max-width">
+{{-- <body class="index-page max-width"> --}}
 
   <!-- Header Section -->
   <header id="header" class="header d-flex align-items-center fixed-top">

@@ -12,8 +12,8 @@ class PemasukkanController extends Controller
      */
     public function index()
     {
-        // $pemasukkan = Pemasukkan::orderBy('tanggal', 'asc')->get();
-        $pemasukkan = Pemasukkan::select('*')->orderByRaw("strftime('%m', tanggal) ASC, strftime('%d', tanggal) ASC")->get();
+        $pemasukkan = Pemasukkan::orderBy('tanggal', 'asc')->get();
+        // $pemasukkan = Pemasukkan::select('*')->orderByRaw("strftime('%m', tanggal) ASC, strftime('%d', tanggal) ASC")->get();
 
         return view('pemasukkan.index', compact('pemasukkan'));
     }

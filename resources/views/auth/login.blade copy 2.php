@@ -20,7 +20,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
@@ -34,12 +33,11 @@
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
     <!-- Injected Styles -->
-    {{-- <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
 
 </head>
 
-<body class="max-width">
-{{-- <body class="index-page max-width"> --}}
+<body class="index-page">
 
   <!-- Header Section -->
   <header id="header" class="header d-flex align-items-center fixed-top">
@@ -53,8 +51,9 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ url('/') }}" >Login</a></li>
-          <li><a href="{{ url('register') }}" class="active">Register</a></li>
+          <li><a href="{{ url('/') }}" >Home</a></li>
+          <li><a href="{{ url('login') }}" class="active">Login</a></li>
+          <li><a href="{{ url('register') }}" >Register</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -77,57 +76,57 @@
           </div>
 
           <div class="col-lg-4 mx-auto rounded-lg">
-            <div class="auth-form-dark text-left py-5 px-4 px-sm-5 bg-white shadow rounded-lg pt-5 pb-4">
-              <h4 class="text-dark">Belum Punya Akun?</h4>
-                <h6 class="font-weight-light text-secondary">Mudah kok, ayo ikuti langkahnya!</h6>
-  
-                <!-- Form Start -->
-                <form method="POST" action="{{ route('register') }}" class="pt-3">
-                    @csrf
-    
-                    <!-- Name -->
-                    <div class="form-group mb-3" >
-                      <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Nama" value="{{ old('name') }}" required autofocus>
-                      @error('name')
-                        <span class="text-danger">{{ $message }}</span>
-                      @enderror
-                    </div>
-    
-                    <!-- NPM -->
-                    <div class="form-group mb-3" >
-                      <input type="text" id="npm" name="npm" class="form-control form-control-lg" placeholder="NPM" value="{{ old('npm') }}" required>
-                      @error('npm')
-                        <span class="text-danger">{{ $message }}</span>
-                      @enderror
-                    </div>
-    
-                    <!-- Password -->
-                    <div class="form-group mb-3" >
-                      <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Password" required>
-                      @error('password')
-                        <span class="text-danger">{{ $message }}</span>
-                      @enderror
-                    </div>
-    
-                    <!-- Confirm Password -->
-                    <div class="form-group mb-3" >
-                      <input type="password" id="password_confirmation" name="password_confirmation" class="form-control form-control-lg" placeholder="Konfirmasi Password" required>
-                      @error('password_confirmation')
-                        <span class="text-danger">{{ $message }}</span>
-                      @enderror
-                    </div>
-    
-                    <!-- Submit Button -->
-                    <div class="mt-3">
-                      <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">DAFTAR</button>
-                    </div>
-    
-                    <!-- Already Registered -->
-                    <div class="text-dark text-center mt-4 font-weight-light">
-                      Sudah Punya Akun? <a href="{{ route('login') }}" class="text-primary">MASUK</a>
-                    </div>
-                  </form>
-                <!-- Form End -->
+            <div class="auth-form-dark text-left py-5 px-4 px-sm-5 bg-white shadow rounded-lg">
+              <div class="brand-logo">
+                <div class="text-center mb-4">
+                    <img src="{{ asset('assets/images/logo-himatif.png') }}" alt="logo" class="logo-center">
+                </div>
+              </div>
+              <h4 class="text-dark">Hello! Ayo Masuk</h4>
+              <h6 class="font-weight-light text-secondary">Login untuk melanjutkan.</h6>
+
+              <!-- Form Start -->
+              <form method="POST" action="{{ route('login') }}" class="pt-3">
+                @csrf
+
+                <!-- NPM -->
+                <div class="form-group">
+                  <input type="text" id="npm" class="form-control form-control-lg" name="npm" :value="old('npm')" required autofocus placeholder="NPM">
+                  @error('npm')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                  <input type="password" id="password" class="form-control form-control-lg" name="password" required placeholder="Password">
+                  @error('password')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+                </div>
+
+                <!-- Login Button -->
+                <div class="mt-3" style="align-items: center">
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                    MASUK
+                  </button>
+                </div>
+
+                <!-- Forgot Password -->
+                <div class="my-2 d-flex justify-content-between align-items-center">
+                  @if (Route::has('password.request'))
+                    <a class="auth-link text-black" href="{{ route('password.request') }}">
+                      Forgot password?
+                    </a>
+                  @endif
+                </div>
+
+                <!-- Register Link -->
+                <div class="text-dark text-center mt-4 font-weight-light">
+                  Belum Punya Akun? <a href="{{ route('register') }}" class="text-primary">Buat</a>
+                </div>
+              </form>
+              <!-- Form End -->
 
             </div>
           </div>

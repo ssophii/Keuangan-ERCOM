@@ -43,7 +43,7 @@
                     <div class="col-md-4">
                         <div class="card">
                             {{-- <div class="card-body me-0 ms-0"> --}}
-                            <div class="card border-dark mb-3 rounded-lg"
+                            <div class="card border-dark mb-3 rounded-lg "
                                 style="max-width: 18rem;border-color:#1C274C;border-weight:10px; background-color: #F5F7FE">
                                 <div class="card-header">Total Pemasukkan</div>
                                 <div class="card-body text-dark">
@@ -52,7 +52,7 @@
                             </div>
                             <div class="card border-dark mb-3 rounded-lg"
                                 style="max-width: 18rem;border-color:black;border-weight:10px; background-color: #F5F7FE">
-                                <div class="card-header">Total Pemasukkan</div>
+                                <div class="card-header">Total Pengeluaran</div>
                                 <div class="card-body text-dark">
                                     <h5 class="card-title">Rp {{ number_format($totalPengeluaran, 0, ',', '.') }}</h5>
                                 </div>
