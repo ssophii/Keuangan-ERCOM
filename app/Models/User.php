@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Anggota;
+use App\Models\RiwayatPemasukkan;
+use App\Models\RiwayatPengeluaran;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,5 +52,15 @@ class User extends Authenticatable
             // 'npm_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function riwayatPemasukkan()
+    {
+        return $this->hasMany(RiwayatPemasukkan::class);
+    }
+
+    public function riwayatPengeluaran()
+    {
+        return $this->hasMany(RiwayatPengeluaran::class);
     }
 }

@@ -18,7 +18,7 @@
                         <!-- Modal Tambah Data -->
                         <div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="modalTambahLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog modal-md">
                                 <div class="modal-content">
                                     <form action="{{ route('anggota.store') }}" method="POST">
                                         @csrf
@@ -124,7 +124,7 @@
                                 <!-- Modal untuk setiap baris -->
                                 <div class="modal fade" id="modal{{ $anggota->id }}" tabindex="-1"
                                     aria-labelledby="modalLabel{{ $anggota->id }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
+                                    <div class="modal-dialog modal-md">
                                         <div class="modal-content">
                                             <!-- Form untuk update -->
                                             <form action="{{ route('anggota.update', $anggota->id) }}" method="POST">

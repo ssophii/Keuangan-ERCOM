@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pemasukkan', [PemasukkanController::class, 'store'])->name('pemasukkan.store');
     Route::delete('/pemasukkan/{id}', [PemasukkanController::class, 'destroy'])->name('pemasukkan.destroy');
     Route::put('/pemasukkan/{id}', [PemasukkanController::class, 'update'])->name('pemasukkan.update');
+    Route::get('/riwayatPemasukkan', [PemasukkanController::class, 'riwayatPemasukkan'])->name('pemasukkan.riwayat');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -50,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pengeluaran', [PengeluaranController::class, 'store'])->name('pengeluaran.store');
     Route::delete('/pengeluaran/{id}', [PengeluaranController::class, 'destroy'])->name('pengeluaran.destroy');
     Route::put('/pengeluaran/{id}', [PengeluaranController::class, 'update'])->name('pengeluaran.update');
+    Route::get('/riwayatPengeluaran', [PengeluaranController::class, 'riwayat'])->name('pengeluaran.riwayat');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

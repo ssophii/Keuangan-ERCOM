@@ -73,7 +73,7 @@
 
           <div class="col-lg-6  d-flex flex-column justify-content-center" data-aos="fade-in">
             <h1>Selamat Datang di Website <span>Keuangan ERCOM</span></h1>
-            {{-- <p>Mau ngapain hari ini?</p> --}}
+            <p>Engineering Research Community</p>
           </div>
 
           <div class="col-lg-4 mx-auto rounded-lg">
@@ -102,7 +102,8 @@
                 </div>
 
                 <!-- Login Button -->
-                <div class="mt-3" style="align-items: center">
+                {{-- <div class="mt-3" style="align-items: center"> --}}
+                <div class="modal-footer">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn pt-2 pb-2" >
                     MASUK
                   </button>
@@ -112,7 +113,7 @@
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   @if (Route::has('password.request'))
                     <a class="auth-link text-black" href="{{ route('password.request') }}">
-                      Forgot password?
+                      Lupa password?
                     </a>
                   @endif
                 </div>
@@ -151,15 +152,14 @@
   </main><!-- End Main -->
 
   <!-- Footer Section -->
-  <footer id="footer" class="footer dark-background">
-    <div class="container footer-top">
-      <!-- Add any footer content here if necessary -->
+  <footer id="footer" class="footer dark-background p-1">
+    <div class="container copyright text-center mt-0 p-2">
+      <p><span>Keuangan ERCOM 2024</span></p>
     </div>
-
-    <div class="container copyright text-center mt-4">
-      <p><span>Administrasi dan Keuangan HIMATIF 2024</span></p>
+    <div class="container copyright text-center mt-0 p-0">
     </div>
-  </footer><!-- End Footer -->
+  </footer>
+  <!-- End Footer -->
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -169,7 +169,6 @@
 
   <!-- Vendor JS Files -->
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
     <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
@@ -186,7 +185,6 @@
     <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('assets/js/template.js') }}"></script>
     <script src="{{ asset('assets/js/settings.js') }}"></script>
-    <script src="{{ asset('js/todolist.js') }}"></script>
 
 
 </body>

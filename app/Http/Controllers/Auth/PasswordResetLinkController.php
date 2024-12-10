@@ -3,46 +3,42 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class PasswordResetLinkController extends Controller
 {
-    public function sendResetLinkViaWhatsApp(Request $request)
+    /**
+     * Display the password reset link request view.
+     */
+    public function create(): View
+    {
+        return view('auth.forgot-password');
+    }
+
+    /**
+     * Handle an incoming password reset link request.
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'no_hp' => 'required|numeric',
+            'email' => ['required', 'email'],
         ]);
 
-        // Cari anggota berdasarkan nomor HP
-        $user = DB::table('anggota')->where('no_hp', $request->no_hp)->first();
-
-        if (!$user) {
-            return back()->withErrors(['no_hp' => __('We couldn\'t find a user with that phone number.')]);
-        }
-
-        // Buat token reset password
-        $token = Str::random(60);
-
-        // Simpan token di tabel password_resets
-        DB::table('password_resets')->updateOrInsert(
-            ['npm' => $user->npm], // Gunakan npm sebagai identifier unik
-            [
-                'npm' => $user->npm,
-                'token' => bcrypt($token),
-                'created_at' => now(),
-            ]
+        // We will send the password reset link to this user. Once we have attempted
+        // to send the link, we will examine the response then see the message we
+        // need to show to the user. Finally, we'll send out a proper response.
+        $status = Password::sendResetLink(
+            $request->only('email')
         );
 
-        // Buat link reset password
-        $resetLink = route('password.reset', ['token' => $token, 'email' => $user->email]);
-
-        // Format pesan WhatsApp
-        $message = 'Here is your password reset link: ' . $resetLink;
-
-        // Redirect ke wa.me dengan pesan
-        return redirect("https://wa.me/{$user->no_hp}?text=" . urlencode($message));
+        return $status == Password::RESET_LINK_SENT
+                    ? back()->with('status', __($status))
+                    : back()->withInput($request->only('email'))
+                        ->withErrors(['email' => __($status)]);
     }
 }

@@ -156,15 +156,14 @@
   </main><!-- End Main -->
 
   <!-- Footer Section -->
-  <footer id="footer" class="footer dark-background">
-    <div class="container footer-top">
-      <!-- Add any footer content here if necessary -->
+  <footer id="footer" class="footer dark-background p-1">
+    <div class="container copyright text-center mt-0 p-2">
+      <p><span>Keuangan ERCOM 2024</span></p>
     </div>
-
-    <div class="container copyright text-center mt-4">
-      <p><span>Administrasi dan Keuangan HIMATIF 2024</span></p>
+    <div class="container copyright text-center mt-0 p-0">
     </div>
-  </footer><!-- End Footer -->
+  </footer>
+  <!-- End Footer -->
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -174,7 +173,6 @@
 
   <!-- Vendor JS Files -->
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
     <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
@@ -191,7 +189,6 @@
     <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('assets/js/template.js') }}"></script>
     <script src="{{ asset('assets/js/settings.js') }}"></script>
-    <script src="{{ asset('js/todolist.js') }}"></script>
 
 
 </body>

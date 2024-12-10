@@ -73,6 +73,7 @@
             /* Sesuaikan dengan lebar sidebar */
         }
     </style>
+
 </head>
 
 <body>
@@ -124,30 +125,40 @@
 
                 <nav class="sidebar sidebar-offcanvas" id="sidebar">
                     <ul class="nav">
-                        @if (Auth::user()->role == 'bendahara' || Auth::user()->role == 'anggota')
-                            <li class="nav-item">
-                                <a class="nav-link" href="/dashboard">
-                                    <i class="fa-solid fa-calculator menu-icon"></i>
-                                    <span class="menu-title">Dashboard</span>
-                                </a>
-                            </li>
-                        @endif
-                        @if (Auth::user()->role == 'bendahara' || Auth::user()->role == 'anggota')
-                            <li class="nav-item">
-                                <a class="nav-link" href="/pemasukkan">
-                                    <i class="fa-solid fa-file-circle-plus menu-icon"></i>
-                                    <span class="menu-title">Pemasukkan</span>
-                                </a>
-                            </li>
-                        @endif
-                        @if (Auth::user()->role == 'bendahara' || Auth::user()->role == 'anggota')
-                            <li class="nav-item">
-                                <a class="nav-link" href="/pengeluaran">
-                                    <i class="fa-solid fa-file-circle-minus menu-icon"></i>
-                                    <span class="menu-title">Pengeluaran</span>
-                                </a>
-                            </li>
-                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">
+                                <i class="fa-solid fa-calculator menu-icon"></i>
+                                <span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#pemasukkan" aria-expanded="false" aria-controls="pemasukkan">
+                                <i class="fa-solid fa-file-circle-plus menu-icon"></i>
+                                <span class="menu-title">Pemasukkan</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="pemasukkan">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="/pemasukkan">Catatan Pemasukkan</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="/riwayatPemasukkan">Riwayat Pemasukkan</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#pengeluaran" aria-expanded="false" aria-controls="pengeluaran">
+                                <i class="fa-solid fa-file-circle-minus menu-icon"></i>
+                                <span class="menu-title">Pengeluaran</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="pengeluaran">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="/pengeluaran">Catatan Pengeluaran</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="/riwayatPengeluaran">Riwayat Pengeluaran</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        
+
                         @if (Auth::user()->role == 'bendahara')
                             <li class="nav-item">
                                 <a class="nav-link" href="/anggota">
@@ -216,6 +227,9 @@
         <!-- End plugin js for this page -->
         <!-- inject:js -->
         <script src="{{ asset('assets/js/off-canvas.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+
         <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
         <script src="{{ asset('assets/js/template.js') }}"></script>
         <script src="{{ asset('assets/js/settings.js') }}"></script>

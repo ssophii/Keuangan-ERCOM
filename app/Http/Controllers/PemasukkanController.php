@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pemasukkan;
+use App\Models\RiwayatPemasukkan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PemasukkanController extends Controller
 {
@@ -75,8 +77,24 @@ class PemasukkanController extends Controller
         ]);
 
         $pemasukkan = Pemasukkan::findOrFail($id);
+        $oldData = $pemasukkan->toArray();
+
         $pemasukkan->update($validate);
+
+        // Simpan riwayat perubahan
+        RiwayatPemasukkan::create([
+            'pemasukkan_id' => $id,
+            'user_id' => Auth::id(),
+            'old_data' => $oldData,
+            'new_data' => $validate,
+        ]);
         return redirect()->back()->with('success', 'Data pemasukkan berhasil diperbarui');
+    }
+
+    public function riwayatPemasukkan()
+    {
+        $riwayat = RiwayatPemasukkan::with(['pemasukkan', 'user'])->orderBy('created_at', 'desc')->get();
+        return view('pemasukkan.riwayat', compact('riwayat'));
     }
 
     /**

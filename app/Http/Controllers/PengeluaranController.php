@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengeluaran;
+use App\Models\RiwayatPengeluaran;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PengeluaranController extends Controller
 {
@@ -97,6 +99,14 @@ class PengeluaranController extends Controller
 
         $pengeluaran = Pengeluaran::findOrFail($id);
 
+        // Simpan riwayat perubahan
+        RiwayatPengeluaran::create([
+            'pengeluaran_id' => $id,
+            'user_id' => Auth::id(),
+            'old_data' => $pengeluaran->toArray(),
+            'new_data' => $validated,
+        ]);
+
         // Cek apakah file baru diunggah
         if ($request->hasFile('bukti')) {
             // Hapus file lama jika ada
@@ -118,6 +128,10 @@ class PengeluaranController extends Controller
         return redirect()->back()->with('success', 'Data pengeluaran berhasil diperbarui');
     }
 
+    public function riwayat(){
+        $riwayat = RiwayatPengeluaran::with(['pengeluaran', 'user'])->orderBy('created_at', 'desc')->get();
+        return view('pengeluaran.riwayat', compact('riwayat'));
+    }
 
     /**
      * Remove the specified resource from storage.

@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Saldo;
+use App\Models\RiwayatPemasukkan;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pemasukkan extends Model
@@ -18,4 +17,8 @@ class Pemasukkan extends Model
         'keterangan',
     ];
 
+    public function riwayat()
+    {
+        return $this->hasMany(RiwayatPemasukkan::class);
+    }
 }

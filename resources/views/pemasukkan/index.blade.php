@@ -20,7 +20,7 @@
                         <!-- Modal Tambah Data -->
                         <div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="modalTambahLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog modal-md">
                                 <div class="modal-content">
                                     <form action="{{ route('pemasukkan.store') }}" method="POST">
                                         @csrf
@@ -129,25 +129,13 @@
                                                 data-toggle="modal" data-target="#modalEdit{{ $data->id }}">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </button>
-
-                                            <!-- Tombol Delete -->
-                                            <form action="{{ route('pemasukkan.destroy', $data->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="btn btn-danger justify-content-center align-items-center"
-                                                    style="width: 35px; height: 35px; border-radius: 10px;"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </button>
-                                            </form>
                                         </td>
                                     @endif
                                 </tr>
                                 <!-- Modal untuk setiap baris -->
                                 <div class="modal fade" id="modalEdit{{ $data->id }}" tabindex="-1"
                                     aria-labelledby="modalLabel{{ $data->id }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
+                                    <div class="modal-dialog modal-md">
                                         <div class="modal-content">
                                             <!-- Form untuk update -->
                                             <form action="{{ route('pemasukkan.update', $data->id) }}" method="POST">
